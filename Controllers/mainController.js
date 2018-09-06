@@ -1,5 +1,4 @@
 var fs = require('fs');
-var config  = require('../config.js');
 var sqlite3 = require('sqlite3').verbose();
 
 let db = new sqlite3.Database('./DB/morningstar.db', (err) => {

@@ -1,7 +1,10 @@
 {
-  "name": "MorningStar Scraper",
+  "name": "MorningStar_Scraper",
   "email": "ryantconte@gmail.com",
-  "version": "0.1",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node main.js"
+  },
   "dependencies": {
     "csv-reader": "^1.0.3",
     "ejs": "^2.6.1",
