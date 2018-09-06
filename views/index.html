@@ -1,0 +1,42 @@
+<!doctype html>
+<title>Morningstar Scraper API</title>
+<style>
+  body { text-align: center; padding: 0px; }
+  h1 { font-size: 50px; }
+  body { font: 20px Helvetica, sans-serif; color: #333; }
+  article { display: block; text-align: left; width: 650px; margin: 0 auto; }
+  a { color: #dc8100; text-decoration: none; }
+  a:hover { color: #333; text-decoration: none; }
+  td {padding-left: 34px; padding-top: 26px;}
+  th {padding-left: 34px; padding-top: 26px;}
+
+</style>
+
+<article>
+    <h1>Morningstar Scraper API</h1>
+    <div>
+        <p>All companies are scraped everyday at 12AM AEST</p>
+        <table style="width:100%">
+          <tr>
+            <th>Method</th>
+            <th>URL</th>
+            <th>Args</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>GET</td>
+            <td>company</td>
+            <td>NA</td>
+            <td>Get's all companies that have been indexed. Response with their Ticker and company name <a href="/company" target="_blank" >example</a></td>
+          </tr>
+          <tr>
+            <td>GET</td>
+            <td>company/:ticker</td>
+            <td>Ticker</td>
+            <td>Gets all the companies Holdings <a href="/company/ZMLP" target="_blank" >example</a></td>
+          </tr>
+        </table>
+        <br><br>
+        <p>&mdash; Ryan @ Wyee Computers</p>
+    </div>
+</article>
