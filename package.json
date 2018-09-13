@@ -3,7 +3,8 @@
   "email": "ryantconte@gmail.com",
   "version": "0.0.1",
   "scripts": {
-    "start": "node main.js"
+    "start": "node main.js",
+    "rebuild": "node ./Scrape/rebuilddb.js && node main.js"
   },
   "dependencies": {
     "csv-reader": "^1.0.3",

@@ -1,7 +1,6 @@
 var puppeteer = require('puppeteer');
 
-exports.scraper = function() {
-let scrape = async (ticker) => {
+exports.scraper = async function(ticker) {
     //   LSE dosen't get scraped, is in different format.
     console.log("Scraping: " + ticker);
     // const browser = await puppeteer.launch();
@@ -56,9 +55,8 @@ let scrape = async (ticker) => {
       return data;
     }
     });
-
     browser.close();
     return result; // Return the data
-};
+
 
 }

@@ -31,7 +31,6 @@ exports.scrape = function(csv) {
       }
   }
 
-
   async function runScrape(){ //Async function to run one by one. dont want them to all run at once as it will crash the process
       for(var element of csv){  //Looping through CSV with key element
         if(parseExchangeSymbol(element[1])){ //Uses the parseExchangeSymbol function to check if the Symbol we got from CSV is valid

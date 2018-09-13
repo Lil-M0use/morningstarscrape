@@ -1,6 +1,6 @@
-exports.rebuild = function(csv) {
+var sqlite3 = require('sqlite3').verbose();
 
-  let db = new sqlite3.Database('./DB/morningstar.db', (err) => { //Open the database
+let db = new sqlite3.Database('./DB/morningstar.db', (err) => { //Open the database
       if(err){
         console.error(err.message);
       }else{
@@ -12,8 +12,8 @@ exports.rebuild = function(csv) {
           if(err){
             console.log(err);
           }
+          console.log("built");
+          db.close();
       });
     }
-  });
-
-}
+});

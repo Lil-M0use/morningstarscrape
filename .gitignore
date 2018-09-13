@@ -1,4 +1,5 @@
 /node_modules
 DB/*
 etf_list.csv
+etf_listTest.csv
 package-lock.json
