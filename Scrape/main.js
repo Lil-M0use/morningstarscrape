@@ -1,6 +1,7 @@
 var sqlite3 = require('sqlite3').verbose();
 var fs = require('fs');
 var scraper = require('./scraper');
+var puppeteer = require('puppeteer');
 
 exports.scrape = function(csv) {
   let db = new sqlite3.Database('./DB/morningstar.db', (err) => { //Open the database
@@ -16,7 +17,7 @@ exports.scrape = function(csv) {
           runScrape();
         }
       }
-  }
+    }
   });
   function parseExchangeSymbol(exchangeSymbol){ //Morningstar Uses a different symbol then what we have the CSV so parsing it. Also used to verify if the Data is valid
     switch(exchangeSymbol) {
@@ -32,9 +33,10 @@ exports.scrape = function(csv) {
   }
 
   async function runScrape(){ //Async function to run one by one. dont want them to all run at once as it will crash the process
+      const browser = await puppeteer.launch({headless: false}); //Open puppeteer in the Init Scrape. To no open and close it all the time
       for(var element of csv){  //Looping through CSV with key element
         if(parseExchangeSymbol(element[1])){ //Uses the parseExchangeSymbol function to check if the Symbol we got from CSV is valid
-          var value = await scraper.scraper(parseExchangeSymbol(element[1]) +":"+ element[2]);
+          var value = await scraper.scraper(parseExchangeSymbol(element[1]) +":"+ element[2], browser); // passing browser through
               if(value){ //if there is a value.
                     db.run(`INSERT INTO company(companyName,companyTicker, holdingsAmount) VALUES ("${value[0].companyName}", "${value[0].companyTicker}", "${value.length-1}")`, function(err) {
                         if(err){
@@ -56,6 +58,7 @@ exports.scrape = function(csv) {
               }
         }
       }
+      browser.close(); //close the browser
       db.close(); // close the db ^.^ we have finished the scrape.
       console.log("Closed DB");
   }
