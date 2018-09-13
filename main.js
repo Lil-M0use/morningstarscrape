@@ -14,6 +14,17 @@ app.use(bodyParser.json());
 
 var j = schedule.scheduleJob('0 0 * * *', function(){
   // Lets Run the scaper Everyday at 12AM
+  // console.log("running csv pull and running scrape");
+  //   var csv = [];
+  //   inputStream.pipe(CsvReadableStream({ parseNumbers: true, parseBooleans: true, trim: true }))
+  //   .on('data', function (row) {
+  //     csv.push(row);
+  //   }).on('end', function (data) {
+  //     scraper.scrape(csv);
+  //   });
+});
+test()
+function test(){
   console.log("running csv pull and running scrape");
     var csv = [];
     inputStream.pipe(CsvReadableStream({ parseNumbers: true, parseBooleans: true, trim: true }))
@@ -22,7 +33,8 @@ var j = schedule.scheduleJob('0 0 * * *', function(){
     }).on('end', function (data) {
       scraper.scrape(csv);
     });
-});
+}
+
 //Express setup
 app.use(express.static(__dirname + '/views'));
 app.listen(port);
