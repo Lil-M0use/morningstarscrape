@@ -33,7 +33,8 @@ exports.scrape = function(csv) {
   }
 
   async function runScrape(){ //Async function to run one by one. dont want them to all run at once as it will crash the process
-      const browser = await puppeteer.launch({headless: false}); //Open puppeteer in the Init Scrape. To no open and close it all the time
+      // const browser = await puppeteer.launch({headless: false}); //Open puppeteer in the Init Scrape. To no open and close it all the time
+      const browser = await puppeteer.launch();
       for(var element of csv){  //Looping through CSV with key element
         if(parseExchangeSymbol(element[1])){ //Uses the parseExchangeSymbol function to check if the Symbol we got from CSV is valid
           var value = await scraper.scraper(parseExchangeSymbol(element[1]) +":"+ element[2], browser); // passing browser through
