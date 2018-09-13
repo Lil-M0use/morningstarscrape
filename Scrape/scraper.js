@@ -1,10 +1,9 @@
 var puppeteer = require('puppeteer');
 
-exports.scraper = async function(ticker, browser) {
+exports.scraper = async function(ticker, browser, page) {
     //   LSE dosen't get scraped, is in different format.
     console.log("Scraping: " + ticker);
     // const browser = await puppeteer.launch();
-    const page = await browser.newPage();
     await page.goto('http://portfolios.morningstar.com/fund/holdings?t='+ticker);
     //Evaluating the page for content
     const result = await page.evaluate(() => {
@@ -54,7 +53,6 @@ exports.scraper = async function(ticker, browser) {
       return data;
     }
     });
-    page.close();
     return result; // Return the data
 
 

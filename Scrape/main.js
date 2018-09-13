@@ -33,11 +33,13 @@ exports.scrape = function(csv) {
   }
 
   async function runScrape(){ //Async function to run one by one. dont want them to all run at once as it will crash the process
-      // const browser = await puppeteer.launch({headless: false}); //Open puppeteer in the Init Scrape. To no open and close it all the time
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({headless: false}); //Open puppeteer in the Init Scrape. To no open and close it all the time
+      const page = await browser.newPage();
+
+      // const browser = await puppeteer.launch();
       for(var element of csv){  //Looping through CSV with key element
         if(parseExchangeSymbol(element[1])){ //Uses the parseExchangeSymbol function to check if the Symbol we got from CSV is valid
-          var value = await scraper.scraper(parseExchangeSymbol(element[1]) +":"+ element[2], browser); // passing browser through
+          var value = await scraper.scraper(parseExchangeSymbol(element[1]) +":"+ element[2], browser, page); // passing browser through
               if(value){ //if there is a value.
                     db.run(`INSERT INTO company(companyName,companyTicker, holdingsAmount) VALUES ("${value[0].companyName}", "${value[0].companyTicker}", "${value.length-1}")`, function(err) {
                         if(err){
